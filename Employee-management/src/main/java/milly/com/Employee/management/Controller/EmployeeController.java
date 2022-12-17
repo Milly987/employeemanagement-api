@@ -16,28 +16,28 @@ public class EmployeeController {
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-    @GetMapping
+    @GetMapping("/getAllEmployees")
     public ResponseEntity<List<Employee>>getAllEmployees(){
         List<Employee>employees=employeeService.findAllEmployees();
         return new ResponseEntity<>( employees, HttpStatus.OK);
     }
-    @GetMapping
+    @GetMapping("/getEmployeeById/{id}")
     public ResponseEntity<Employee>getEmployeeById(@PathVariable("id") Long id){
         Employee employees=employeeService.findEmployeeById(id);
         return new ResponseEntity<>( employees, HttpStatus.OK);
     }
-    @PostMapping
+    @PostMapping("/addEmployee")
     public ResponseEntity<Employee>addEmployee (@RequestBody Employee employee){
         Employee employees=employeeService.addEmployee(employee);
         return new ResponseEntity<>( employees, HttpStatus.CREATED);
     }
-    @PutMapping
+    @PutMapping("/updateEmployee")
     public ResponseEntity<Employee>updateEmployee(@RequestBody Employee employee) {
         Employee employees = employeeService.updateEmployee(employee);
         return new ResponseEntity<>(employees, HttpStatus.OK);
 
     }
-    @DeleteMapping
+    @DeleteMapping("/deleteEmployee")
     public ResponseEntity<?>deleteEmployeeById(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.OK);
